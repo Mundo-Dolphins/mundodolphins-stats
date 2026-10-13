@@ -1,0 +1,31 @@
+# Credenciales: nunca se versionan
+.env
+.env.*
+!.env.example
+*.pem
+
+# Datos generados y cachés locales
+cache/
+processed/
+output/
+bin/
+.task/
+*.log
+
+# Artefactos
+/dolphins-stats
+vendor/
+coverage.out
+coverage*.txt
+*.out
+*.test
+go.work
+go.work.sum
+.gocache/
+
+# Sistema / editores
+.DS_Store
+.idea/
+.vscode/
+*~
+*.swp

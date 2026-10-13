@@ -1,0 +1,1012 @@
+{
+  "schema": {
+    "name": "mundodolphins.pfr.boxscore",
+    "version": "1.1.0"
+  },
+  "generated_at": "2026-02-18T12:41:13+01:00",
+  "source": {
+    "site": "pro-football-reference",
+    "url": "https://www.pro-football-reference.com/boxscores/201309300nor.htm",
+    "cache_file": "cache/pfr/games/2013/201309300nor.html"
+  },
+  "game_id": "201309300nor",
+  "data": {
+    "scorebox": {
+      "teams": [
+        {
+          "sb_id": "sb_team_0",
+          "name": {
+            "content": "Player HS",
+            "link": "https://www.pro-football-reference.com/teams/mia/2013.htm"
+          },
+          "score": 17,
+          "record": "3-1",
+          "coach": {
+            "content": "Coach K",
+            "link": "https://www.pro-football-reference.com/coaches/PhilJo0.htm"
+          },
+          "logo": {
+            "src": "https://cdn.ssref.net/req/202601261/tlogo/pfr/mia-2013.png",
+            "alt": "2013 Player HS Logo"
+          },
+          "prevnext": {
+            "prev": {
+              "content": "Prev Game",
+              "link": "https://www.pro-football-reference.com/boxscores/201309220mia.htm"
+            },
+            "next": {
+              "content": "Next Game",
+              "link": "https://www.pro-football-reference.com/boxscores/201310060mia.htm"
+            }
+          }
+        },
+        {
+          "sb_id": "sb_team_1",
+          "name": {
+            "content": "Player HT",
+            "link": "https://www.pro-football-reference.com/teams/nor/2013.htm"
+          },
+          "score": 38,
+          "record": "4-0",
+          "coach": {
+            "content": "Coach L",
+            "link": "https://www.pro-football-reference.com/coaches/PaytSe0.htm"
+          },
+          "logo": {
+            "src": "https://cdn.ssref.net/req/202601261/tlogo/pfr/nor-2013.png",
+            "alt": "2013 Player HT Logo"
+          },
+          "prevnext": {
+            "prev": {
+              "content": "Prev Game",
+              "link": "https://www.pro-football-reference.com/boxscores/201309220nor.htm"
+            },
+            "next": {
+              "content": "Next Game",
+              "link": "https://www.pro-football-reference.com/boxscores/201310060chi.htm"
+            }
+          }
+        }
+      ],
+      "meta": {
+        "date": "Monday Sep 30, 2013",
+        "stadium": {
+          "content": "Mercedes-Benz Superdome",
+          "link": "https://www.pro-football-reference.com/stadiums/NOR00.htm"
+        },
+        "raw": [
+          "Monday Sep 30, 2013",
+          "Start Time: 8:40pm",
+          "Stadium: Mercedes-Benz Superdome",
+          "Attendance: 73,118",
+          "Time of Game: 3:09",
+          "Logos via Sports Logos.net\n            / About logos"
+        ]
+      }
+    },
+    "linescore": {
+      "title": "Line Score",
+      "teams": [
+        {
+          "team": {
+            "content": "Player HS",
+            "link": "https://www.pro-football-reference.com/teams/mia/2013.htm"
+          },
+          "logo": {
+            "src": "https://cdn.ssref.net/req/202601261/tlogo/pfr/mia-2013.png",
+            "alt": "2013 Player HS Logo"
+          },
+          "quarters": {
+            "1": 3,
+            "2": 7,
+            "3": 0,
+            "4": 7
+          },
+          "final": 17
+        },
+        {
+          "team": {
+            "content": "Player HT",
+            "link": "https://www.pro-football-reference.com/teams/nor/2013.htm"
+          },
+          "logo": {
+            "src": "https://cdn.ssref.net/req/202601261/tlogo/pfr/nor-2013.png",
+            "alt": "2013 Player HT Logo"
+          },
+          "quarters": {
+            "1": 7,
+            "2": 14,
+            "3": 14,
+            "4": 3
+          },
+          "final": 38
+        }
+      ]
+    },
+    "week": "4",
+    "youtube": {
+      "status": "unknown",
+      "videos": null
+    },
+    "tables": {
+      "expected_points": {
+        "title": "Expected Points Summary Table",
+        "legends": {
+          "pbp_exp_points_def_pass": "Pbp exp points def pass",
+          "pbp_exp_points_def_rush": "Pbp exp points def rush",
+          "pbp_exp_points_def_to": "Pbp exp points def to",
+          "pbp_exp_points_def_tot": "Pbp exp points def tot",
+          "pbp_exp_points_fgxp": "Pbp exp points fgxp",
+          "pbp_exp_points_k": "Pbp exp points k",
+          "pbp_exp_points_kr": "Pbp exp points kr",
+          "pbp_exp_points_off_pass": "Pbp exp points off pass",
+          "pbp_exp_points_off_rush": "Pbp exp points off rush",
+          "pbp_exp_points_off_to": "Pbp exp points off to",
+          "pbp_exp_points_off_tot": "Pbp exp points off tot",
+          "pbp_exp_points_p": "Pbp exp points p",
+          "pbp_exp_points_pr": "Pbp exp points pr",
+          "pbp_exp_points_st": "Pbp exp points st",
+          "pbp_exp_points_tot": "Pbp exp points tot",
+          "team_name": "Team name"
+        },
+        "row_count": 2,
+        "rows": [
+          {
+            "pbp_exp_points_def_pass": -26.72,
+            "pbp_exp_points_def_rush": 9.65,
+            "pbp_exp_points_def_to": 2.82,
+            "pbp_exp_points_def_tot": -17.69,
+            "pbp_exp_points_fgxp": 3.49,
+            "pbp_exp_points_k": 1.21,
+            "pbp_exp_points_kr": -0.6,
+            "pbp_exp_points_off_pass": -4.34,
+            "pbp_exp_points_off_rush": -0.66,
+            "pbp_exp_points_off_to": -15.19,
+            "pbp_exp_points_off_tot": -5.42,
+            "pbp_exp_points_p": 0.09,
+            "pbp_exp_points_pr": -2.44,
+            "pbp_exp_points_st": 1.75,
+            "pbp_exp_points_tot": -21,
+            "team_name": "Dolphins"
+          },
+          {
+            "pbp_exp_points_def_pass": 4.34,
+            "pbp_exp_points_def_rush": 0.66,
+            "pbp_exp_points_def_to": 15.19,
+            "pbp_exp_points_def_tot": 5.42,
+            "pbp_exp_points_fgxp": -3.49,
+            "pbp_exp_points_k": 0.6,
+            "pbp_exp_points_kr": -1.21,
+            "pbp_exp_points_off_pass": 26.72,
+            "pbp_exp_points_off_rush": -9.65,
+            "pbp_exp_points_off_to": -2.82,
+            "pbp_exp_points_off_tot": 17.69,
+            "pbp_exp_points_p": 2.44,
+            "pbp_exp_points_pr": -0.09,
+            "pbp_exp_points_st": -1.75,
+            "pbp_exp_points_tot": 21,
+            "team_name": "Saints"
+          }
+        ]
+      },
+      "game_info": {
+        "title": "Game Info Table",
+        "row_count": 3,
+        "rows": [
+          {
+            "info": "Won Toss",
+            "stat": "Dolphins (deferred)"
+          },
+          {
+            "info": "Roof",
+            "stat": "dome"
+          },
+          {
+            "info": "Surface",
+            "stat": "sportturf"
+          }
+        ]
+      },
+      "home_drives": {
+        "title": "Saints Drives Table",
+        "legends": {
+          "drive_num": "Drive num",
+          "end_event": "End event",
+          "net_yds": "Net yds",
+          "play_count_tip": "Play count tip",
+          "quarter": "Quarter",
+          "start_at": "Start at",
+          "time_start": "Time start",
+          "time_total": "Time total"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "drive_num": 1,
+            "end_event": "Touchdown",
+            "net_yds": 82,
+            "play_count_tip": 6,
+            "quarter": 1,
+            "start_at": "NOR 18",
+            "time_start": "15:00",
+            "time_total": "3:08"
+          },
+          {
+            "drive_num": 2,
+            "end_event": "Punt",
+            "net_yds": -2,
+            "play_count_tip": 3,
+            "quarter": 1,
+            "start_at": "NOR 20",
+            "time_start": "7:16",
+            "time_total": "0:55"
+          },
+          {
+            "drive_num": 3,
+            "end_event": "Punt",
+            "net_yds": 22,
+            "play_count_tip": 8,
+            "quarter": 1,
+            "start_at": "NOR 20",
+            "time_start": "4:44",
+            "time_total": "5:26"
+          }
+        ]
+      },
+      "home_snap_counts": {
+        "title": "Saints Snap Counts Table",
+        "legends": {
+          "def_pct": "Def pct",
+          "defense": "Defense",
+          "off_pct": "Off pct",
+          "offense": "Offense",
+          "player": "Player",
+          "pos": "Pos",
+          "special_teams": "Special teams",
+          "st_pct": "St pct"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 67,
+            "player": {
+              "content": "Player HU",
+              "link": "https://www.pro-football-reference.com/players/B/BrowCh28.htm"
+            },
+            "pos": "T",
+            "special_teams": 7,
+            "st_pct": "25%"
+          },
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 67,
+            "player": {
+              "content": "Player HV",
+              "link": "https://www.pro-football-reference.com/players/S/StriZa20.htm"
+            },
+            "pos": "T",
+            "special_teams": 7,
+            "st_pct": "25%"
+          },
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 67,
+            "player": {
+              "content": "Player HW",
+              "link": "https://www.pro-football-reference.com/players/E/EvanJa21.htm"
+            },
+            "pos": "G",
+            "special_teams": 7,
+            "st_pct": "25%"
+          }
+        ]
+      },
+      "home_starters": {
+        "title": "Saints Starters Table",
+        "legends": {
+          "player": "Player",
+          "pos": "Pos"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "player": {
+              "content": "Player IQ",
+              "link": "https://www.pro-football-reference.com/players/B/BushRa00.htm"
+            },
+            "pos": "NB"
+          },
+          {
+            "player": {
+              "content": "Player HY",
+              "link": "https://www.pro-football-reference.com/players/B/BreeDr00.htm"
+            },
+            "pos": "QB"
+          },
+          {
+            "player": {
+              "content": "Player IH",
+              "link": "https://www.pro-football-reference.com/players/T/ThomPi00.htm"
+            },
+            "pos": "RB"
+          }
+        ]
+      },
+      "kicking": {
+        "title": "Kicking & Punting Table",
+        "legends": {
+          "fga": "Fga",
+          "fgm": "Fgm",
+          "player": "Player",
+          "punt": "Punt",
+          "punt_long": "Punt long",
+          "punt_yds": "Punt yds",
+          "punt_yds_per_punt": "Punt yds per punt",
+          "team": "Team",
+          "xpa": "Xpa",
+          "xpm": "Xpm"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "fga": 1,
+            "fgm": 1,
+            "player": {
+              "content": "Player JN",
+              "link": "https://www.pro-football-reference.com/players/S/SturCa00.htm"
+            },
+            "punt": "",
+            "punt_long": "",
+            "punt_yds": "",
+            "punt_yds_per_punt": "",
+            "team": "MIA",
+            "xpa": 2,
+            "xpm": 2
+          },
+          {
+            "fga": "",
+            "fgm": "",
+            "player": {
+              "content": "Player JO",
+              "link": "https://www.pro-football-reference.com/players/F/FielBr20.htm"
+            },
+            "punt": 4,
+            "punt_long": 57,
+            "punt_yds": 208,
+            "punt_yds_per_punt": 52,
+            "team": "MIA",
+            "xpa": "",
+            "xpm": ""
+          },
+          {
+            "fga": 2,
+            "fgm": 1,
+            "player": {
+              "content": "Player JL",
+              "link": "https://www.pro-football-reference.com/players/H/HartGa00.htm"
+            },
+            "punt": "",
+            "punt_long": "",
+            "punt_yds": "",
+            "punt_yds_per_punt": "",
+            "team": "NOR",
+            "xpa": 5,
+            "xpm": 5
+          }
+        ]
+      },
+      "officials": {
+        "title": "Officials Table",
+        "row_count": 3,
+        "rows": [
+          {
+            "name": {
+              "content": "Player JP",
+              "link": "https://www.pro-football-reference.com/officials/VinoBi0r.htm"
+            },
+            "ref_pos": "Referee"
+          },
+          {
+            "name": {
+              "content": "Player JQ",
+              "link": "https://www.pro-football-reference.com/officials/KingPa0r.htm"
+            },
+            "ref_pos": "Umpire"
+          },
+          {
+            "name": {
+              "content": "Player JR",
+              "link": "https://www.pro-football-reference.com/officials/MellJi0r.htm"
+            },
+            "ref_pos": "Head Linesman"
+          }
+        ]
+      },
+      "pbp": {
+        "title": "Full Play-By-Play Table",
+        "legends": {
+          "detail": "Detail",
+          "down": "Down",
+          "exp_pts_after": "Exp pts after",
+          "exp_pts_before": "Exp pts before",
+          "location": "Location",
+          "pbp_score_aw": "Pbp score aw",
+          "pbp_score_hm": "Pbp score hm",
+          "qtr_time_remain": "Qtr time remain",
+          "quarter": "Quarter",
+          "yds_to_go": "Yds to go"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "detail": "Dolphins won the coin toss and deferred, Saints to receive the opening kickoff.",
+            "down": "",
+            "exp_pts_after": "",
+            "exp_pts_before": "",
+            "location": "",
+            "pbp_score_aw": "",
+            "pbp_score_hm": "",
+            "qtr_time_remain": "",
+            "quarter": "",
+            "yds_to_go": ""
+          },
+          {
+            "detail": {
+              "content": "Player JN kicks off 71 yards, returned by Player IE for 24 yards (tackle by Player JW)",
+              "links": [
+                {
+                  "anchor": "Player JN",
+                  "link": "/players/P/PlayerJN00.htm"
+                },
+                {
+                  "anchor": "Player IE",
+                  "link": "/players/P/PlayerIE00.htm"
+                },
+                {
+                  "anchor": "Player JW",
+                  "link": "/players/P/PlayerJW00.htm"
+                }
+              ]
+            },
+            "down": "",
+            "exp_pts_after": -0.04,
+            "exp_pts_before": 0,
+            "location": "MIA 35",
+            "pbp_score_aw": "",
+            "pbp_score_hm": "",
+            "qtr_time_remain": {
+              "content": "15:00",
+              "link": "#pbp_1.000"
+            },
+            "quarter": 1,
+            "yds_to_go": ""
+          },
+          {
+            "detail": {
+              "content": "Player IH left end for 3 yards (tackle by Player JX and Player JY)",
+              "links": [
+                {
+                  "anchor": "Player IH",
+                  "link": "/players/P/PlayerIH00.htm"
+                },
+                {
+                  "anchor": "Player JX",
+                  "link": "/players/P/PlayerJX00.htm"
+                },
+                {
+                  "anchor": "Player JY",
+                  "link": "/players/P/PlayerJY00.htm"
+                }
+              ]
+            },
+            "down": 1,
+            "exp_pts_after": 0.01,
+            "exp_pts_before": 0.04,
+            "location": "NOR 18",
+            "pbp_score_aw": "",
+            "pbp_score_hm": "",
+            "qtr_time_remain": {
+              "content": "14:56",
+              "link": "#pbp_2.000"
+            },
+            "quarter": 1,
+            "yds_to_go": 10
+          }
+        ]
+      },
+      "player_defense": {
+        "title": "Defense Table",
+        "legends": {
+          "def_int": "Def int",
+          "def_int_long": "Def int long",
+          "def_int_td": "Def int td",
+          "def_int_yds": "Def int yds",
+          "fumbles_forced": "Fumbles forced",
+          "fumbles_rec": "Fumbles rec",
+          "fumbles_rec_td": "Fumbles rec td",
+          "fumbles_rec_yds": "Fumbles rec yds",
+          "pass_defended": "Pass defended",
+          "player": "Player",
+          "qb_hits": "Qb hits",
+          "sacks": "Sacks",
+          "tackles_assists": "Tackles assists",
+          "tackles_combined": "Tackles combined",
+          "tackles_loss": "Tackles loss",
+          "tackles_solo": "Tackles solo",
+          "team": "Team"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "def_int": "",
+            "def_int_long": "",
+            "def_int_td": "",
+            "def_int_yds": "",
+            "fumbles_forced": "",
+            "fumbles_rec": "",
+            "fumbles_rec_td": "",
+            "fumbles_rec_yds": "",
+            "pass_defended": "",
+            "player": {
+              "content": "Player KJ",
+              "link": "https://www.pro-football-reference.com/players/O/OdriJa99.htm"
+            },
+            "qb_hits": 1,
+            "sacks": 1,
+            "tackles_assists": 1,
+            "tackles_combined": 5,
+            "tackles_loss": 4,
+            "tackles_solo": 4,
+            "team": "MIA"
+          },
+          {
+            "def_int": "",
+            "def_int_long": "",
+            "def_int_td": "",
+            "def_int_yds": "",
+            "fumbles_forced": "",
+            "fumbles_rec": "",
+            "fumbles_rec_td": "",
+            "fumbles_rec_yds": "",
+            "pass_defended": "",
+            "player": {
+              "content": "Player KN",
+              "link": "https://www.pro-football-reference.com/players/V/VernOl00.htm"
+            },
+            "qb_hits": 1,
+            "sacks": 1,
+            "tackles_assists": 2,
+            "tackles_combined": 5,
+            "tackles_loss": 1,
+            "tackles_solo": 3,
+            "team": "MIA"
+          },
+          {
+            "def_int": "",
+            "def_int_long": "",
+            "def_int_td": "",
+            "def_int_yds": "",
+            "fumbles_forced": "",
+            "fumbles_rec": "",
+            "fumbles_rec_td": "",
+            "fumbles_rec_yds": "",
+            "pass_defended": "",
+            "player": {
+              "content": "Player JZ",
+              "link": "https://www.pro-football-reference.com/players/C/ClemCh97.htm"
+            },
+            "qb_hits": "",
+            "sacks": "",
+            "tackles_assists": 1,
+            "tackles_combined": 8,
+            "tackles_loss": "",
+            "tackles_solo": 7,
+            "team": "MIA"
+          }
+        ]
+      },
+      "player_offense": {
+        "title": "Passing, Rushing, & Receiving Table",
+        "legends": {
+          "fumbles": "Fumbles",
+          "fumbles_lost": "Fumbles lost",
+          "pass_att": "Pass att",
+          "pass_cmp": "Pass cmp",
+          "pass_int": "Pass int",
+          "pass_long": "Pass long",
+          "pass_rating": "Pass rating",
+          "pass_sacked": "Pass sacked",
+          "pass_sacked_yds": "Pass sacked yds",
+          "pass_td": "Pass td",
+          "pass_yds": "Pass yds",
+          "player": "Player",
+          "rec": "Rec",
+          "rec_long": "Rec long",
+          "rec_td": "Rec td",
+          "rec_yds": "Rec yds",
+          "rush_att": "Rush att",
+          "rush_long": "Rush long",
+          "rush_td": "Rush td",
+          "rush_yds": "Rush yds",
+          "targets": "Targets",
+          "team": "Team"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "fumbles": 1,
+            "fumbles_lost": 1,
+            "pass_att": 35,
+            "pass_cmp": 22,
+            "pass_int": 3,
+            "pass_long": 50,
+            "pass_rating": 57.9,
+            "pass_sacked": 4,
+            "pass_sacked_yds": 33,
+            "pass_td": 1,
+            "pass_yds": 249,
+            "player": {
+              "content": "Player KD",
+              "link": "https://www.pro-football-reference.com/players/T/TannRy00.htm"
+            },
+            "rec": "",
+            "rec_long": "",
+            "rec_td": "",
+            "rec_yds": "",
+            "rush_att": 4,
+            "rush_long": 26,
+            "rush_td": "",
+            "rush_yds": 48,
+            "targets": "",
+            "team": "MIA"
+          },
+          {
+            "fumbles": "",
+            "fumbles_lost": "",
+            "pass_att": "",
+            "pass_cmp": "",
+            "pass_int": "",
+            "pass_long": "",
+            "pass_rating": "",
+            "pass_sacked": "",
+            "pass_sacked_yds": "",
+            "pass_td": "",
+            "pass_yds": "",
+            "player": {
+              "content": "Player KF",
+              "link": "https://www.pro-football-reference.com/players/M/MillLa01.htm"
+            },
+            "rec": 1,
+            "rec_long": 6,
+            "rec_td": "",
+            "rec_yds": 6,
+            "rush_att": 11,
+            "rush_long": 20,
+            "rush_td": 1,
+            "rush_yds": 62,
+            "targets": 3,
+            "team": "MIA"
+          },
+          {
+            "fumbles": "",
+            "fumbles_lost": "",
+            "pass_att": "",
+            "pass_cmp": "",
+            "pass_int": "",
+            "pass_long": "",
+            "pass_rating": "",
+            "pass_sacked": "",
+            "pass_sacked_yds": "",
+            "pass_td": "",
+            "pass_yds": "",
+            "player": {
+              "content": "Player KH",
+              "link": "https://www.pro-football-reference.com/players/T/ThomDa03.htm"
+            },
+            "rec": 1,
+            "rec_long": 1,
+            "rec_td": "",
+            "rec_yds": 1,
+            "rush_att": 4,
+            "rush_long": 4,
+            "rush_td": "",
+            "rush_yds": 5,
+            "targets": 1,
+            "team": "MIA"
+          }
+        ]
+      },
+      "returns": {
+        "title": "Kick/Punt Returns Table",
+        "legends": {
+          "kick_ret": "Kick ret",
+          "kick_ret_long": "Kick ret long",
+          "kick_ret_td": "Kick ret td",
+          "kick_ret_yds": "Kick ret yds",
+          "kick_ret_yds_per_ret": "Kick ret yds per ret",
+          "player": "Player",
+          "punt_ret": "Punt ret",
+          "punt_ret_long": "Punt ret long",
+          "punt_ret_td": "Punt ret td",
+          "punt_ret_yds": "Punt ret yds",
+          "punt_ret_yds_per_ret": "Punt ret yds per ret",
+          "team": "Team"
+        },
+        "row_count": 2,
+        "rows": [
+          {
+            "kick_ret": 3,
+            "kick_ret_long": 28,
+            "kick_ret_td": "",
+            "kick_ret_yds": 68,
+            "kick_ret_yds_per_ret": 22.7,
+            "player": {
+              "content": "Player KC",
+              "link": "https://www.pro-football-reference.com/players/T/ThigMa00.htm"
+            },
+            "punt_ret": 1,
+            "punt_ret_long": 5,
+            "punt_ret_td": "",
+            "punt_ret_yds": 5,
+            "punt_ret_yds_per_ret": 5,
+            "team": "MIA"
+          },
+          {
+            "kick_ret": 2,
+            "kick_ret_long": 24,
+            "kick_ret_td": "",
+            "kick_ret_yds": 36,
+            "kick_ret_yds_per_ret": 18,
+            "player": {
+              "content": "Player IE",
+              "link": "https://www.pro-football-reference.com/players/S/SproDa00.htm"
+            },
+            "punt_ret": 3,
+            "punt_ret_long": 18,
+            "punt_ret_td": "",
+            "punt_ret_yds": 44,
+            "punt_ret_yds_per_ret": 14.7,
+            "team": "NOR"
+          }
+        ]
+      },
+      "scoring": {
+        "title": "Scoring Table",
+        "legends": {
+          "description": "Description",
+          "home_team_score": "Home team score",
+          "quarter": "Quarter",
+          "team": "Team",
+          "vis_team_score": "Vis team score"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "description": {
+              "content": "Player IE 5 yard rush (Player JL kick)",
+              "links": [
+                {
+                  "anchor": "Player IE",
+                  "link": "/players/P/PlayerIE00.htm"
+                },
+                {
+                  "anchor": "Player JL",
+                  "link": "/players/P/PlayerJL00.htm"
+                }
+              ]
+            },
+            "home_team_score": 7,
+            "quarter": 1,
+            "team": "Saints",
+            "time": "11:52",
+            "vis_team_score": ""
+          },
+          {
+            "description": {
+              "content": "Player JN 34 yard field goal",
+              "links": [
+                {
+                  "anchor": "Player JN",
+                  "link": "/players/P/PlayerJN00.htm"
+                }
+              ]
+            },
+            "home_team_score": 7,
+            "quarter": "",
+            "team": "Dolphins",
+            "time": "7:16",
+            "vis_team_score": 3
+          },
+          {
+            "description": {
+              "content": "Player HZ 27 yard pass from Player HY (Player JL kick)",
+              "links": [
+                {
+                  "anchor": "Player HZ",
+                  "link": "/players/P/PlayerHZ00.htm"
+                },
+                {
+                  "anchor": "Player HY",
+                  "link": "/players/P/PlayerHY00.htm"
+                },
+                {
+                  "anchor": "Player JL",
+                  "link": "/players/P/PlayerJL00.htm"
+                }
+              ]
+            },
+            "home_team_score": 14,
+            "quarter": 2,
+            "team": "Saints",
+            "time": "8:01",
+            "vis_team_score": 3
+          }
+        ]
+      },
+      "team_stats": {
+        "title": "Team Stats Table",
+        "legends": {
+          "home_stat": "Home stat",
+          "vis_stat": "Vis stat"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "home_stat": 23,
+            "stat": "First Downs",
+            "vis_stat": 19
+          },
+          {
+            "home_stat": "24-68-1",
+            "stat": "Rush-Yds-TDs",
+            "vis_stat": "19-115-1"
+          },
+          {
+            "home_stat": "30-39-413-4-0",
+            "stat": "Cmp-Att-Yd-TD-INT",
+            "vis_stat": "22-35-249-1-3"
+          }
+        ]
+      },
+      "vis_drives": {
+        "title": "Dolphins Drives Table",
+        "legends": {
+          "drive_num": "Drive num",
+          "end_event": "End event",
+          "net_yds": "Net yds",
+          "play_count_tip": "Play count tip",
+          "quarter": "Quarter",
+          "start_at": "Start at",
+          "time_start": "Time start",
+          "time_total": "Time total"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "drive_num": 1,
+            "end_event": "Field Goal",
+            "net_yds": 67,
+            "play_count_tip": 9,
+            "quarter": 1,
+            "start_at": "MIA 17",
+            "time_start": "11:52",
+            "time_total": "4:36"
+          },
+          {
+            "drive_num": 2,
+            "end_event": "Punt",
+            "net_yds": 9,
+            "play_count_tip": 3,
+            "quarter": 1,
+            "start_at": "MIA 35",
+            "time_start": "6:21",
+            "time_total": "1:37"
+          },
+          {
+            "drive_num": 3,
+            "end_event": "Fumble",
+            "net_yds": 46,
+            "play_count_tip": 5,
+            "quarter": 2,
+            "start_at": "MIA 9",
+            "time_start": "14:18",
+            "time_total": "2:30"
+          }
+        ]
+      },
+      "vis_snap_counts": {
+        "title": "Dolphins Snap Counts Table",
+        "legends": {
+          "def_pct": "Def pct",
+          "defense": "Defense",
+          "off_pct": "Off pct",
+          "offense": "Offense",
+          "player": "Player",
+          "pos": "Pos",
+          "special_teams": "Special teams",
+          "st_pct": "St pct"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 60,
+            "player": {
+              "content": "Player KZ",
+              "link": "https://www.pro-football-reference.com/players/M/MartJo01.htm"
+            },
+            "pos": "T",
+            "special_teams": 3,
+            "st_pct": "11%"
+          },
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 60,
+            "player": {
+              "content": "Player LA",
+              "link": "https://www.pro-football-reference.com/players/C/ClabTy20.htm"
+            },
+            "pos": "T",
+            "special_teams": 3,
+            "st_pct": "11%"
+          },
+          {
+            "def_pct": "",
+            "defense": "",
+            "off_pct": "100%",
+            "offense": 60,
+            "player": {
+              "content": "Player LB",
+              "link": "https://www.pro-football-reference.com/players/J/JerrJo20.htm"
+            },
+            "pos": "G",
+            "special_teams": 3,
+            "st_pct": "11%"
+          }
+        ]
+      },
+      "vis_starters": {
+        "title": "Dolphins Starters Table",
+        "legends": {
+          "player": "Player",
+          "pos": "Pos"
+        },
+        "row_count": 3,
+        "rows": [
+          {
+            "player": {
+              "content": "Player KD",
+              "link": "https://www.pro-football-reference.com/players/T/TannRy00.htm"
+            },
+            "pos": "QB"
+          },
+          {
+            "player": {
+              "content": "Player KF",
+              "link": "https://www.pro-football-reference.com/players/M/MillLa01.htm"
+            },
+            "pos": "RB"
+          },
+          {
+            "player": {
+              "content": "Player KE",
+              "link": "https://www.pro-football-reference.com/players/W/WallMi00.htm"
+            },
+            "pos": "WR"
+          }
+        ]
+      }
+    }
+  }
+}

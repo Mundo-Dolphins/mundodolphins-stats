@@ -1,0 +1,7 @@
+{
+  "items": [
+    {"id": {"videoId": "abc123"}},
+    {"id": {"videoId": "def456"}},
+    {"id": {"videoId": "abc123"}}
+  ]
+}

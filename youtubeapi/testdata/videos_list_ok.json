@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "id": "abc123",
+      "snippet": {
+        "title": "Miami Dolphins vs Raiders 1966-09-02",
+        "description": "Broadcast game film",
+        "channelTitle": "Vintage Pro Football"
+      },
+      "contentDetails": {
+        "duration": "PT44M28S"
+      },
+      "status": {
+        "embeddable": true
+      }
+    },
+    {
+      "id": "def456",
+      "snippet": {
+        "title": "Highlights clip",
+        "description": "short clip",
+        "channelTitle": "Highlights TV"
+      },
+      "contentDetails": {
+        "duration": "PT3M10S"
+      },
+      "status": {
+        "embeddable": false
+      }
+    }
+  ]
+}

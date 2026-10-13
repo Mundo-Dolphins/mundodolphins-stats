@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Videos Discovery</title>
+  <style>
+    :root { color-scheme: light; --bg:#f6f7f9; --panel:#fff; --line:#d8dde6; --text:#17202a; --muted:#5f6b7a; --good:#136f3a; --warn:#9a5b00; --bad:#a12828; --brand:#0b5cab; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:14px/1.4 system-ui, -apple-system, Segoe UI, sans-serif; color:var(--text); background:var(--bg); }
+    header { min-height:56px; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:10px 18px; border-bottom:1px solid var(--line); background:var(--panel); }
+    main { display:grid; grid-template-columns:minmax(300px, 420px) 1fr; height:calc(100vh - 56px); min-height:0; }
+    aside { border-right:1px solid var(--line); background:var(--panel); min-height:0; display:flex; flex-direction:column; }
+    section { overflow:auto; padding:18px; min-height:0; }
+    button { border:1px solid var(--line); background:#fff; color:var(--text); border-radius:6px; padding:7px 10px; cursor:pointer; }
+    button:disabled { opacity:.5; cursor:not-allowed; }
+    button.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+    button.good { background:var(--good); border-color:var(--good); color:#fff; }
+    button.bad { background:var(--bad); border-color:var(--bad); color:#fff; }
+    input { width:100%; border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+    .meta { color:var(--muted); font-size:12px; }
+    .filter-bar { flex:0 0 auto; padding:12px; border-bottom:1px solid var(--line); }
+    .games-list { flex:1 1 auto; min-height:0; overflow:auto; }
+    .game { padding:12px 14px; border-bottom:1px solid var(--line); cursor:pointer; }
+    .game:hover, .game.active { background:#eef5ff; }
+    .game.disabled { cursor:not-allowed; opacity:.55; }
+    .game.disabled:hover { background:transparent; }
+    .game-title { font-weight:650; }
+    .pill { display:inline-block; border-radius:999px; padding:2px 7px; font-size:12px; border:1px solid var(--line); color:var(--muted); }
+    .candidate, .current { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:12px; margin:12px 0; }
+    .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+    .space { justify-content:space-between; }
+    .score { font-weight:700; }
+    .score.good { color:var(--good); } .score.warn { color:var(--warn); } .score.bad { color:var(--bad); }
+    iframe, .yt-player { width:100%; max-width:760px; aspect-ratio:16/9; border:0; background:#000; }
+    .video-link { display:inline-block; margin-top:8px; color:var(--brand); word-break:break-all; }
+    .status-line { margin:12px 0; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:#fff; }
+    .empty { color:var(--muted); padding:20px; }
+    @media (max-width: 820px) { main { grid-template-columns:1fr; } aside { height:42vh; border-right:0; border-bottom:1px solid var(--line); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div><strong>Videos Discovery</strong> <span class="meta">{{.CacheFile}}</span></div>
+    <div class="row"><button id="autopilot-start" class="primary" onclick="startAutopilot()">Autopilot</button><button id="autopilot-stop" onclick="stopAutopilot()" disabled>Stop</button><button onclick="resetReviewProgress()">Reset progress</button><button onclick="loadGames()">Refresh</button></div>
+  </header>
+  <main>
+    <aside>
+      <div class="filter-bar"><input id="filter" placeholder="Filter games" oninput="renderGames()"></div>
+      <div id="games" class="games-list"></div>
+    </aside>
+    <section>
+      <div id="detail" class="empty">Select a game.</div>
+    </section>
+  </main>
+  <script>
+    let games = [];
+    let selected = null;
+    let candidates = [];
+    let searchState = {status: 'idle', message: ''};
+    let searchInFlight = false;
+    let autopilotRunning = false;
+    let autopilotStopRequested = false;
+    let autopilotPausedForReview = false;
+    let autopilotStats = {processed: 0, approved: 0, none: 0, removed: 0};
+    let visibleCandidateCount = 0;
+    let detailMessage = '';
+    let ytAPIReady = false;
+    let embedProbeSeq = 0;
+    const embedDetections = new Map();
+    const persistedEmbedDetections = new Set();
+    const reviewedThisSession = new Set();
+    const autoSearchAttempted = new Set();
+    const scoreThreshold = {{.ScoreThreshold}};
+    const reviewProgressKey = 'videosDiscovery.reviewProgress:' + {{printf "%q" .CacheFile}};
+    let restoredSelectedGameID = '';
+
+    async function api(path, options) {
+      const res = await fetch(path, options);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || res.statusText);
+      return data;
+    }
+    function escapeHTML(value) {
+      return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    }
+    function escapeAttr(value) { return escapeHTML(value); }
+    function videoId(url) {
+      try {
+        const parsed = new URL(url, 'https://www.youtube.com');
+        const queryID = parsed.searchParams.get('v');
+        if (queryID) return queryID;
+        const host = parsed.hostname.toLowerCase();
+        const parts = parsed.pathname.split('/').filter(Boolean);
+        if (host === 'youtu.be' && parts.length) return parts[0];
+        if (['embed', 'shorts', 'live', 'v'].includes(parts[0]) && parts[1]) return parts[1];
+      } catch {}
+      return '';
+    }
+    function scoreClass(score) { return score >= 60 ? 'good' : (score > 0 ? 'warn' : 'bad'); }
+    function visibleGames() {
+      const q = document.getElementById('filter').value.toLowerCase();
+      return games.filter(g => !reviewedThisSession.has(g.game.GameID) && JSON.stringify(g).toLowerCase().includes(q));
+    }
+    function embeddableValue(item) {
+      const value = item.Embeddable ?? item.embeddable;
+      return typeof value === 'boolean' ? value : null;
+    }
+    function knownEmbeddableValue(item) {
+      const explicit = embeddableValue(item);
+      if (explicit !== null) return explicit;
+      const key = candidateKey(item);
+      if (!key || !embedDetections.has(key)) return null;
+      return embedDetections.get(key);
+    }
+    function candidateKey(item) {
+      const id = item.VideoID || item.video_id || item.id || videoId(item.URL || item.url || '');
+      if (id) return 'id:' + id;
+      const url = item.URL || item.url || '';
+      return url ? 'url:' + url : '';
+    }
+    function currentVideoKeys(game) {
+      const keys = new Set();
+      (game.videos || []).forEach(v => {
+        const key = candidateKey(v);
+        if (key) keys.add(key);
+      });
+      return keys;
+    }
+    function embeddablePill(value) {
+      if (value === true) return '<span class="pill">embeddable</span>';
+      if (value === false) return '<span class="pill">link only</span>';
+      return '<span class="pill">checking embed</span>';
+    }
+    function durationText(item) {
+      const explicit = item.DurationText || item.duration_text || '';
+      if (explicit) return explicit;
+      const seconds = Number(item.DurationSec ?? item.duration_sec ?? item.DurationSeconds ?? item.duration_seconds ?? 0);
+      if (!Number.isFinite(seconds) || seconds <= 0) return '';
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = Math.floor(seconds % 60);
+      if (h > 0) return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+      return m + ':' + String(s).padStart(2, '0');
+    }
+    function videoFrame(id, url, embeddable, key, gameID) {
+      const link = url ? '<a class="video-link" href="' + escapeAttr(url) + '" target="_blank" rel="noopener noreferrer">' + escapeHTML(url) + '</a>' : '';
+      if (embeddable === false) {
+        return '<div class="status-line meta">This video is not embeddable. It can still be selected and published as a YouTube link.</div>' + link;
+      }
+      if (!id) return link;
+      if (embeddable === true) {
+        return '<iframe class="yt-embed" src="https://www.youtube.com/embed/' + encodeURIComponent(id) + '" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' + link;
+      }
+      const playerID = 'yt-player-' + (++embedProbeSeq);
+      const status = embeddable === null ? '<div class="status-line meta">Checking whether this video can be embedded...</div>' : '';
+      return status + '<div id="' + playerID + '" class="yt-player" data-video-id="' + escapeAttr(id) + '" data-video-key="' + escapeAttr(key || '') + '" data-game-id="' + escapeAttr(gameID || '') + '" data-url="' + escapeAttr(url || '') + '"></div>' + link;
+    }
+    function embedControls(id, url) {
+      const disabled = isSearchBusy() ? ' disabled' : '';
+      return '<div class="row"><button onclick="setCurrentVideoEmbeddable(&quot;' + escapeAttr(id) + '&quot;,&quot;' + escapeAttr(url) + '&quot;,true)"' + disabled + '>Use embed</button><button onclick="setCurrentVideoEmbeddable(&quot;' + escapeAttr(id) + '&quot;,&quot;' + escapeAttr(url) + '&quot;,false)"' + disabled + '>Use link</button><button class="bad" onclick="removeCurrentVideo(&quot;' + escapeAttr(id) + '&quot;,&quot;' + escapeAttr(url) + '&quot;)"' + disabled + '>Remove</button></div>';
+    }
+    function searchStatusHTML() {
+      if (searchState.status === 'loading') return '<div class="status-line">Searching YouTube...</div>';
+      if (searchInFlight) return '<div class="status-line">Search in progress. Actions are disabled until it finishes.</div>';
+      if (searchState.status === 'error') return '<div class="status-line score bad">' + escapeHTML(searchState.message) + '</div>';
+      if (searchState.status === 'done') {
+        return '<div class="status-line">Search complete. Found ' + searchState.found + ', eligible ' + searchState.eligible + '.<div class="meta">' + escapeHTML(searchState.query || '') + '</div></div>';
+      }
+      return '';
+    }
+    function detailMessageHTML() {
+      return detailMessage ? '<div class="status-line">' + escapeHTML(detailMessage) + '</div>' : '';
+    }
+    function loadReviewProgress() {
+      try {
+        const raw = localStorage.getItem(reviewProgressKey);
+        if (!raw) return;
+        const progress = JSON.parse(raw);
+        (progress.reviewed || []).forEach(gameID => {
+          if (gameID) reviewedThisSession.add(gameID);
+        });
+        restoredSelectedGameID = progress.selectedGameID || '';
+      } catch {}
+    }
+    function saveReviewProgress() {
+      try {
+        localStorage.setItem(reviewProgressKey, JSON.stringify({
+          reviewed: Array.from(reviewedThisSession),
+          selectedGameID: selected && selected.game ? selected.game.GameID : '',
+          savedAt: new Date().toISOString()
+        }));
+      } catch {}
+    }
+    function renderAutopilotControls() {
+      const start = document.getElementById('autopilot-start');
+      const stop = document.getElementById('autopilot-stop');
+      if (start) {
+        start.disabled = autopilotRunning || searchInFlight || searchState.status === 'loading';
+        start.textContent = autopilotPausedForReview ? 'Resume Autopilot' : 'Autopilot';
+      }
+      if (stop) stop.disabled = !autopilotRunning;
+    }
+    function resetReviewProgress() {
+      if (autopilotRunning) return;
+      autopilotPausedForReview = false;
+      reviewedThisSession.clear();
+      autoSearchAttempted.clear();
+      restoredSelectedGameID = selected && selected.game ? selected.game.GameID : '';
+      localStorage.removeItem(reviewProgressKey);
+      detailMessage = 'Review progress reset.';
+      renderGames();
+      renderDetail();
+      maybeAutoSearch();
+    }
+    async function loadGames() {
+      const data = await api('/api/games');
+      games = data.games || [];
+      if (!selected && restoredSelectedGameID) {
+        selected = games.find(g => g.game.GameID === restoredSelectedGameID) || null;
+        if (selected) autoSearchAttempted.delete(selected.game.GameID);
+        restoredSelectedGameID = '';
+      }
+      if (selected) {
+        selected = games.find(g => g.game.GameID === selected.game.GameID) || null;
+      }
+      renderGames();
+      renderDetail();
+      renderAutopilotControls();
+      if (selected) maybeAutoSearch();
+    }
+    function activateGame(game) {
+      if (isSearchBusy()) return;
+      selected = game;
+      candidates = [];
+      if (!searchInFlight) searchState = {status: 'idle', message: ''};
+      detailMessage = '';
+      autoSearchAttempted.delete(game.game.GameID);
+      saveReviewProgress();
+      renderGames();
+      renderDetail();
+      maybeAutoSearch();
+    }
+    function maybeAutoSearch() {
+      if (!selected) return;
+      if (autopilotPausedForReview) return;
+      if (candidates.length > 0) return;
+      const hasNoCurrentVideos = (selected.videos || []).length === 0;
+      if (isSearchBusy()) return;
+      if (autoSearchAttempted.has(selected.game.GameID)) return;
+      if (!hasNoCurrentVideos && searchState.status !== 'idle') return;
+      const reason = autoSearchReason(selected);
+      if (!reason) return;
+      autoSearchAttempted.add(selected.game.GameID);
+      detailMessage = reason;
+      renderDetail();
+      search();
+    }
+    function autoSearchReason(game) {
+      const status = String(game.status || '').toLowerCase();
+      if (status === 'none' || status === 'rejected') return '';
+      const videos = game.videos || [];
+      if (videos.length === 0) return 'No cached video. Searching for candidates.';
+      if (videos.every(v => embeddableValue(v) === false)) return 'All current videos are link-only. Searching for embeddable options.';
+      const score = game.score || 0;
+      if (score > 0 && score < scoreThreshold) return 'Current video score is low. Searching for more options.';
+      return '';
+    }
+    function isDiscoveryCompleteStatus(status) {
+      return ['candidate', 'approved', 'selected', 'rejected', 'none'].includes(String(status || '').toLowerCase());
+    }
+    function isPublishableGame(game) {
+      const status = String(game.status || '').toLowerCase();
+      return ['approved', 'selected'].includes(status) && (game.videos || []).length > 0;
+    }
+    function isAutopilotReviewGame(game) {
+      const status = String(game.status || '').toLowerCase();
+      return (game.needs_review || status === 'candidate') && (game.videos || []).length > 0;
+    }
+    function needsAutopilotSearch(game) {
+      const status = String(game.status || '').toLowerCase();
+      if (isPublishableGame(game) || status === 'none' || status === 'rejected') return false;
+      if ((game.videos || []).length === 0) return true;
+      return !isDiscoveryCompleteStatus(status);
+    }
+    function nextAutopilotGame() {
+      return games.find(game => {
+        const gameID = game.game && game.game.GameID;
+        if (!gameID || reviewedThisSession.has(gameID)) return false;
+        return isAutopilotReviewGame(game) || needsAutopilotSearch(game);
+      }) || null;
+    }
+    function gameLabel(game) {
+      if (!game || !game.game) return '';
+      return game.game.GameID + ' · ' + game.game.AwayTeam + ' @ ' + game.game.HomeTeam;
+    }
+    async function prepareAutopilotStepDisplay() {
+      const game = nextAutopilotGame();
+      if (!game) return;
+      selected = game;
+      candidates = [];
+      searchState = {status: 'loading', message: ''};
+      detailMessage = autopilotSummary('Searching next') + ' ' + gameLabel(game);
+      saveReviewProgress();
+      renderGames();
+      renderDetail();
+      await new Promise(resolve => setTimeout(resolve, 0));
+    }
+    function renderGames() {
+      const el = document.getElementById('games');
+      el.innerHTML = '';
+      visibleGames().forEach(g => {
+        const div = document.createElement('div');
+        const disabled = isSearchBusy();
+        div.className = 'game' + (selected && selected.game.GameID === g.game.GameID ? ' active' : '') + (disabled ? ' disabled' : '');
+        div.onclick = () => {
+          if (isSearchBusy()) return;
+          activateGame(g);
+        };
+        div.innerHTML = '<div class="game-title">' + escapeHTML(g.game.AwayTeam) + ' @ ' + escapeHTML(g.game.HomeTeam) + '</div>' +
+          '<div class="meta">' + escapeHTML(g.game.GameID) + ' · week ' + escapeHTML(g.game.Week || '-') + '</div>' +
+          '<div class="row"><span class="pill">' + escapeHTML(g.status) + '</span>' +
+          (g.needs_review ? '<span class="pill">review</span>' : '') +
+          (g.score ? '<span class="score ' + scoreClass(g.score) + '">' + g.score + '</span>' : '') + '</div>';
+        el.appendChild(div);
+      });
+      if (!el.innerHTML) el.innerHTML = '<div class="empty">No pending games in this session.</div>';
+      renderAutopilotControls();
+    }
+    function renderDetail() {
+      const el = document.getElementById('detail');
+      if (!selected) { el.className = 'empty'; el.textContent = detailMessage || 'Select a game.'; return; }
+      el.className = '';
+      const g = selected;
+      const current = (g.videos || []).map(v => {
+        const id = v.id || videoId(v.url || '');
+        const key = candidateKey(v);
+        const embed = knownEmbeddableValue(v);
+        const duration = durationText(v);
+        return '<div class="current"><div class="row space"><strong>' + escapeHTML(v.title || id || 'Untitled') + '</strong><div class="row"><span class="pill">' + escapeHTML(v.channel || 'unknown') + '</span>' + (duration ? '<span class="pill">' + escapeHTML(duration) + '</span>' : '') + embeddablePill(embed) + '</div></div>' +
+          videoFrame(id, v.url || '', embed, key, g.game.GameID) + embedControls(id, v.url || '') + '</div>';
+      }).join('');
+      const currentKeys = currentVideoKeys(g);
+      const visibleCandidates = candidates
+        .map((candidate, index) => ({candidate, index}))
+        .filter(item => {
+          const key = candidateKey(item.candidate);
+          return !key || !currentKeys.has(key);
+        });
+      visibleCandidateCount = visibleCandidates.length;
+      const searching = isSearchBusy();
+      const actionDisabled = searching ? ' disabled' : '';
+      const cand = visibleCandidates.map(({candidate: c, index: i}, displayIndex) => {
+        const id = c.VideoID || c.video_id || videoId(c.URL || c.url || '');
+        const title = c.Title || c.title || '';
+        const channel = c.Channel || c.channel || '';
+        const score = c.Score ?? c.score ?? 0;
+        const url = c.URL || c.url || (id ? 'https://www.youtube.com/watch?v=' + id : '');
+        const key = candidateKey(c);
+        const embed = knownEmbeddableValue(c);
+        const duration = durationText(c);
+        return '<div class="candidate"><div class="row space"><strong>[' + (displayIndex+1) + '] ' + escapeHTML(title) + '</strong><div class="row"><span class="score ' + scoreClass(score) + '">' + score + '</span>' + embeddablePill(embed) + '</div></div>' +
+          '<div class="meta">' + escapeHTML(channel) + (duration ? ' · ' + escapeHTML(duration) : '') + '</div>' +
+          videoFrame(id, url, embed, key, g.game.GameID) +
+          '<p>' + escapeHTML(c.Snippet || c.snippet || '') + '</p><div class="row"><button class="primary" onclick="selectCandidate(' + i + ')"' + actionDisabled + '>Add video</button></div></div>';
+      }).join('');
+      el.innerHTML = '<div class="row space"><div><h2>' + escapeHTML(g.game.AwayTeam) + ' @ ' + escapeHTML(g.game.HomeTeam) + '</h2><div class="meta">' + escapeHTML(g.game.GameID) + ' · ' + escapeHTML(g.game.DateRaw || '') + ' · week ' + escapeHTML(g.game.Week || '-') + '</div></div>' +
+        '<div class="row"><button onclick="search()"' + actionDisabled + '>Search</button><button onclick="keepCurrent()"' + actionDisabled + '>Keep</button><button class="good" onclick="statusAction(&quot;approve&quot;)"' + actionDisabled + '>Approve</button><button onclick="statusAction(&quot;none&quot;)"' + actionDisabled + '>None</button><button class="bad" onclick="statusAction(&quot;reject&quot;)"' + actionDisabled + '>Reject</button></div></div>' +
+        '<div class="row"><span class="pill">' + escapeHTML(g.status) + '</span>' + (g.score ? '<span class="score ' + scoreClass(g.score) + '">' + g.score + '/60</span>' : '') + '</div>' +
+        detailMessageHTML() +
+        searchStatusHTML() +
+        (g.error ? '<p class="score bad">' + escapeHTML(g.error) + '</p>' : '') +
+        '<h3>Current</h3>' + (current || '<p class="empty">No cached video.</p>') +
+        '<h3>Candidates</h3>' + (cand || '<p class="empty">Run search for this game.</p>');
+      initEmbedProbes();
+      renderAutopilotControls();
+    }
+    function initEmbedProbes() {
+      if (!ytAPIReady || !window.YT || !window.YT.Player) return;
+      document.querySelectorAll('.yt-player:not([data-probed="true"])').forEach(node => {
+        node.dataset.probed = 'true';
+        probeEmbed(node);
+      });
+    }
+    function probeEmbed(node) {
+      const videoID = node.dataset.videoId || '';
+      const key = node.dataset.videoKey || '';
+      if (!videoID) return;
+      let settled = false;
+      new YT.Player(node.id, {
+        videoId: videoID,
+        playerVars: {rel: 0, modestbranding: 1, playsinline: 1, origin: window.location.origin},
+        events: {
+          onReady: () => {
+            window.setTimeout(() => {
+              if (!settled) {
+                settled = true;
+                markEmbeddable(node, true);
+              }
+            }, 1800);
+          },
+          onError: event => {
+            if ([100, 101, 150].includes(Number(event.data))) {
+              settled = true;
+              markEmbeddable(node, false);
+            }
+          }
+        }
+      });
+    }
+    function markEmbeddable(node, embeddable) {
+      const key = node.dataset.videoKey || '';
+      if (!key) return;
+      const previous = embedDetections.get(key);
+      embedDetections.set(key, embeddable);
+      candidates.forEach(candidate => {
+        if (candidateKey(candidate) === key) {
+          candidate.Embeddable = embeddable;
+          candidate.embeddable = embeddable;
+        }
+      });
+      if (selected) {
+        (selected.videos || []).forEach(video => {
+          if (candidateKey(video) === key) video.embeddable = embeddable;
+        });
+      }
+      persistCurrentEmbedDetection(node, embeddable);
+      if (previous !== embeddable) renderDetail();
+    }
+    async function persistCurrentEmbedDetection(node, embeddable) {
+      if (!selected) return;
+      const gameID = node.dataset.gameId || '';
+      const videoID = node.dataset.videoId || '';
+      const url = node.dataset.url || '';
+      if (!gameID || gameID !== selected.game.GameID) return;
+      const current = (selected.videos || []).some(video => candidateKey(video) === (node.dataset.videoKey || ''));
+      if (!current) return;
+      const persistKey = gameID + ':' + (videoID || url) + ':' + embeddable;
+      if (persistedEmbedDetections.has(persistKey)) return;
+      persistedEmbedDetections.add(persistKey);
+      try {
+        await api('/api/games/' + gameID + '/embed', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({video_id:videoID, url:url, embeddable:embeddable})});
+      } catch (err) {
+        detailMessage = 'Embed detection could not be saved: ' + (err.message || String(err));
+        renderDetail();
+      }
+    }
+    async function search() {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      const gameID = selected.game.GameID;
+      searchInFlight = true;
+      searchState = {status: 'loading', message: ''};
+      candidates = [];
+      renderDetail();
+      let nextSearchState = searchState;
+      try {
+        const data = await api('/api/games/' + gameID + '/search', {method:'POST'});
+        nextSearchState = {status: 'done', found: data.found || 0, eligible: data.eligible || 0, query: data.query || ''};
+        if (selected && selected.game.GameID === gameID) {
+          candidates = data.candidates || [];
+          if (data.status) selected.status = data.status;
+        }
+      } catch (err) {
+        nextSearchState = {status: 'error', message: err.message || String(err)};
+      } finally {
+        searchInFlight = false;
+        if (selected && selected.game.GameID === gameID) {
+          searchState = nextSearchState;
+        } else if (searchState.status === 'loading') {
+          searchState = {status: 'idle', message: ''};
+        }
+        renderDetail();
+        maybeAutoSearch();
+      }
+    }
+    function advanceAfterAction(gameID, message, resumeAutopilot = false) {
+      reviewedThisSession.add(gameID);
+      candidates = [];
+      searchState = {status: 'idle', message: ''};
+      selected = visibleGames()[0] || null;
+      detailMessage = selected ? (resumeAutopilot ? 'Resuming autopilot...' : '') : message;
+      saveReviewProgress();
+      renderGames();
+      renderDetail();
+      if (resumeAutopilot) {
+        autopilotPausedForReview = false;
+        window.setTimeout(() => startAutopilot(), 0);
+        return;
+      }
+      maybeAutoSearch();
+    }
+    function shouldResumeAutopilotAfterReview() {
+      return autopilotPausedForReview && !autopilotStopRequested;
+    }
+    async function selectCandidate(i) {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      const gameID = selected.game.GameID;
+      const shouldAutoApprove = visibleCandidateCount === 1;
+      const autoEmbeddable = knownEmbeddableValue(candidates[i]) !== false;
+      const embeddable = autoEmbeddable;
+      const candidate = {...candidates[i], Embeddable: embeddable, embeddable: embeddable};
+      await api('/api/games/' + gameID + '/select', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({candidate})});
+      if (shouldAutoApprove) {
+        await api('/api/games/' + gameID + '/approve', {method:'POST'});
+        await loadGames();
+        advanceAfterAction(gameID, 'Only candidate selected and approved. Pick another game.', shouldResumeAutopilotAfterReview());
+        return;
+      }
+      detailMessage = embeddable ? 'Video added as embedded.' : 'Video added as link-only.';
+      await loadGames();
+    }
+    async function setCurrentVideoEmbeddable(videoID, url, embeddable) {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      const gameID = selected.game.GameID;
+      await api('/api/games/' + gameID + '/embed', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({video_id:videoID, url:url, embeddable:embeddable})});
+      detailMessage = embeddable ? 'Video will be published as embedded.' : 'Video will be published as a link.';
+      await loadGames();
+    }
+    async function removeCurrentVideo(videoID, url) {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      const gameID = selected.game.GameID;
+      await api('/api/games/' + gameID + '/remove', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({video_id:videoID, url:url})});
+      detailMessage = 'Video removed.';
+      await loadGames();
+      maybeAutoSearch();
+    }
+    function keepCurrent() {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      advanceAfterAction(selected.game.GameID, 'Cached video kept unchanged. Pick another game.', shouldResumeAutopilotAfterReview());
+    }
+    async function statusAction(action) {
+      if (!selected) return;
+      if (isSearchBusy()) return;
+      const gameID = selected.game.GameID;
+      await api('/api/games/' + gameID + '/' + action, {method:'POST'});
+      await loadGames();
+      advanceAfterAction(gameID, 'Status saved. Pick another game.', shouldResumeAutopilotAfterReview());
+    }
+    function stopAutopilot() {
+      autopilotStopRequested = true;
+      autopilotPausedForReview = false;
+      detailMessage = autopilotSummary('Stopping');
+      renderAutopilotControls();
+      renderDetail();
+    }
+    async function startAutopilot() {
+      if (autopilotRunning || searchInFlight || searchState.status === 'loading') return;
+      autopilotRunning = true;
+      autopilotStopRequested = false;
+      autopilotPausedForReview = false;
+      autopilotStats = {processed: 0, approved: 0, none: 0, removed: 0};
+      candidates = [];
+      searchState = {status: 'idle', message: ''};
+      detailMessage = autopilotSummary('Running');
+      renderGames();
+      renderDetail();
+      try {
+        while (!autopilotStopRequested) {
+          await prepareAutopilotStepDisplay();
+          const data = await api('/api/autopilot/step', {method:'POST'});
+          autopilotStats.processed += Number(data.processed || 0);
+          autopilotStats.approved += Number(data.auto_approved || 0);
+          autopilotStats.none += Number(data.marked_none || 0);
+          autopilotStats.removed += Number(data.removed || 0);
+          const gameID = data.game && data.game.game ? data.game.game.GameID : '';
+          if (data.action === 'approved' || data.action === 'none') {
+            if (data.game) selected = data.game;
+            candidates = [];
+            searchState = {status: 'done', found: data.found || 0, eligible: data.eligible || 0, query: data.query || ''};
+            if (gameID) reviewedThisSession.add(gameID);
+            detailMessage = autopilotSummary(data.action === 'approved' ? 'Approved' : 'None') + (selected ? ' ' + gameLabel(selected) : '');
+            await loadGames();
+            await new Promise(resolve => setTimeout(resolve, 80));
+            continue;
+          }
+          if (data.action === 'done') {
+            selected = data.game || null;
+            candidates = [];
+            searchState = {status: 'idle', message: ''};
+            detailMessage = data.message || autopilotSummary('Done');
+            break;
+          }
+          await loadGames();
+          if (gameID) selected = games.find(g => g.game.GameID === gameID) || data.game;
+          candidates = data.candidates || [];
+          searchState = {status: 'done', found: data.found || 0, eligible: data.eligible || 0, query: data.query || ''};
+          detailMessage = data.message || autopilotSummary('Stopped');
+          autopilotPausedForReview = data.action === 'needs_review';
+          break;
+        }
+        if (autopilotStopRequested) {
+          autopilotPausedForReview = false;
+          detailMessage = autopilotSummary('Stopped');
+        }
+      } catch (err) {
+        autopilotPausedForReview = false;
+        detailMessage = 'Autopilot stopped: ' + (err.message || String(err));
+      } finally {
+        autopilotRunning = false;
+        autopilotStopRequested = false;
+        saveReviewProgress();
+        renderGames();
+        renderDetail();
+      }
+    }
+    function autopilotSummary(label) {
+      return label + '. Processed ' + autopilotStats.processed + ', approved ' + autopilotStats.approved + ', none ' + autopilotStats.none + ', removed ' + autopilotStats.removed + '.';
+    }
+    function isSearchBusy() {
+      return autopilotRunning || searchInFlight || searchState.status === 'loading';
+    }
+    window.onYouTubeIframeAPIReady = () => {
+      ytAPIReady = true;
+      initEmbedProbes();
+    };
+    const ytScript = document.createElement('script');
+    ytScript.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(ytScript);
+    loadReviewProgress();
+    loadGames().catch(err => document.getElementById('detail').textContent = err.message);
+    renderAutopilotControls();
+  </script>
+</body>
+</html>

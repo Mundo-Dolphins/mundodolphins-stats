@@ -1,0 +1,229 @@
+{
+  "schema": {
+    "name": "mundodolphins.pfr.team-season",
+    "version": "1.3.0"
+  },
+  "generated_at": "2024-01-15T10:30:00Z",
+  "source": {
+    "site": "pro-football-reference",
+    "url": "https://www.pro-football-reference.com/teams/mia/2024.htm",
+    "cache_file": "cache/pfr/main/2024.html",
+    "fetched_at": "2024-01-15T10:25:00Z"
+  },
+  "team": {
+    "id": "mia",
+    "name": "Miami Dolphins"
+  },
+  "season": 2024,
+  "data": {
+    "main": {
+      "record": "14-3-0",
+      "pts_for": 505,
+      "pts_against": 329
+    },
+    "tables": {
+      "passing": [
+        {
+          "player": "Tua Tagovailoa",
+          "att": 591,
+          "cmp": 413,
+          "pct": 69.9,
+          "yds": 4036,
+          "td": 22,
+          "int": 10,
+          "rating": 98.5
+        }
+      ],
+      "rushing_and_receiving": [
+        {
+          "player": "De'Von Achane",
+          "rush_att": 127,
+          "rush_yds": 531,
+          "rush_avg": 4.2,
+          "rush_long": 44,
+          "rush_td": 2,
+          "rec": 31,
+          "rec_yds": 254,
+          "rec_avg": 8.2,
+          "rec_long": 24,
+          "rec_td": 2
+        }
+      ],
+      "defense": [
+        {
+          "player": "Bradley Chubb",
+          "tackles": 72,
+          "tackles_solo": 48,
+          "tackles_assist": 24,
+          "sacks": 6.0,
+          "sack_yds": 42,
+          "int": 0,
+          "int_yds": 0,
+          "int_td": 0,
+          "pd": 3,
+          "fumbles": 1,
+          "fumbles_rec": 0
+        }
+      ],
+      "scoring": [
+        {
+          "player": "De'Von Achane",
+          "td_pass": 0,
+          "td_rush": 2,
+          "td_rec": 2,
+          "td_defense": 0,
+          "2pm": 0,
+          "2pp": 0,
+          "xp_kick": 0,
+          "xp_pass": 0,
+          "fg": 0,
+          "pts": 24
+        }
+      ],
+      "team_conversions": [
+        {
+          "third_down_success": 95,
+          "third_down_att": 234,
+          "third_down_pct": 40.6,
+          "fourth_down_success": 12,
+          "fourth_down_att": 22,
+          "fourth_down_pct": 54.5,
+          "red_zone_scores": 47,
+          "red_zone_att": 59,
+          "red_zone_pct": 79.7
+        }
+      ],
+      "team_td_log": [
+        {
+          "player": "De'Von Achane",
+          "quarter": "1",
+          "time": "5:45",
+          "distance": "1",
+          "type": "rush",
+          "description": "TD (1 yd run)"
+        }
+      ],
+      "opp_td_log": [
+        {
+          "player": "Opponent Player",
+          "quarter": "2",
+          "time": "10:30",
+          "distance": "5",
+          "type": "pass",
+          "description": "TD (5 yd pass)"
+        }
+      ],
+      "kicking": [
+        {
+          "player": "Jason Sanders",
+          "fgm": 37,
+          "fga": 41,
+          "fgpct": 90.2,
+          "fg_long": 56,
+          "xpm": 26,
+          "xpa": 28,
+          "xppct": 92.9,
+          "ko": 71,
+          "ko_yds": 4446,
+          "kotb": 0,
+          "kotbpct": 0.0
+        }
+      ],
+      "punting": [
+        {
+          "player": "Jake Bailey",
+          "punts": 56,
+          "yds": 2639,
+          "yds_per_pun": 47.1,
+          "long": 64,
+          "in20": 22,
+          "tb": 1,
+          "blk": 0,
+          "net_yds_per_pun": 41.6
+        }
+      ],
+      "returns": [
+        {
+          "player": "De'Von Achane",
+          "kret": 1,
+          "kret_yds": 32,
+          "kret_avg": 32.0,
+          "kret_long": 32,
+          "kret_td": 0,
+          "pret": 0,
+          "pret_yds": 0,
+          "pret_avg": 0.0,
+          "pret_long": 0,
+          "pret_td": 0
+        }
+      ]
+    },
+    "advanced": {
+      "advanced_passing": [
+        {
+          "player": "Tua Tagovailoa",
+          "age": 26,
+          "cmp_air_yds": 3254,
+          "cmp_air_ypa": 5.5,
+          "att": 591,
+          "cmp": 413,
+          "drops": 9,
+          "droppct": 1.5,
+          "play_act": 48,
+          "pres_pct": 22.3,
+          "rpo": 12,
+          "rpo_ypa": 8.2,
+          "spike": 3,
+          "throw_away": 15,
+          "yac": 782,
+          "yacavg": 1.9,
+          "pk_time": 2.45,
+          "scrambles_ypa": 5.8
+        }
+      ],
+      "advanced_rushing": [
+        {
+          "player": "De'Von Achane",
+          "att": 127,
+          "broken_tackles": 8,
+          "yac": 425,
+          "yds": 531,
+          "yds_before_contact": 250,
+          "ybcatt": 1.97,
+          "first_down": 42
+        }
+      ],
+      "advanced_receiving": [
+        {
+          "player": "Tyreek Hill",
+          "rec": 80,
+          "adot": 5.2,
+          "air_yds": 416,
+          "broken_tackles": 12,
+          "drops": 2,
+          "rec_yds": 1354,
+          "yac": 938,
+          "rec_rating": 132.5,
+          "target": 95
+        }
+      ],
+      "advanced_defense": [
+        {
+          "player": "Bradley Chubb",
+          "age": 28,
+          "blitzes": 34,
+          "def_cmp": 8,
+          "def_cmp_pct": 12.5,
+          "int": 0,
+          "pressures": 42,
+          "qb_hurry": 18,
+          "sacks": 6.0,
+          "tackles": 72,
+          "tackle_assist": 24,
+          "tackle_loss": 5,
+          "misse_tackles": 3
+        }
+      ]
+    }
+  }
+}

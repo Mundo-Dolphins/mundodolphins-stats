@@ -1,0 +1,146 @@
+{
+  "schema": {
+    "name": "mundodolphins.pfr.team-season",
+    "version": "1.3.0"
+  },
+  "generated_at": "2024-01-15T10:30:00Z",
+  "source": {
+    "site": "pro-football-reference",
+    "url": "https://www.pro-football-reference.com/teams/mia/2024.htm",
+    "cache_file": "cache/pfr/main/2024.html",
+    "fetched_at": "2024-01-15T10:25:00Z"
+  },
+  "team": {
+    "id": "mia",
+    "name": "Miami Dolphins"
+  },
+  "season": 2024,
+  "data": {
+    "main": {
+      "tables": {
+        "passing": {
+          "rows": [
+            {
+              "Name": "Tua Tagovailoa",
+              "Pos": "QB",
+              "Cmp": "200",
+              "Att": "350",
+              "Yds": "2500",
+              "TD": "15",
+              "Int": "5"
+            }
+          ],
+          "title": "Passing",
+          "legends": {}
+        },
+        "rushing_and_receiving": {
+          "rows": [
+            {
+              "Name": "De'Von Achane",
+              "Pos": "RB",
+              "RushAtt": "120",
+              "RushYds": "600",
+              "RushTD": "5",
+              "Rec": "30",
+              "RecYds": "250",
+              "RecTD": "2"
+            }
+          ],
+          "title": "Rushing and Receiving",
+          "legends": {}
+        },
+        "defense": {
+          "rows": [
+            {
+              "Name": "Emmanuel Ogbah",
+              "Pos": "DE",
+              "Tackles": "45",
+              "TacklesAssist": "15",
+              "Sacks": "8.5",
+              "Int": "1"
+            }
+          ],
+          "title": "Defense Stats",
+          "legends": {}
+        },
+        "roster": {
+          "rows": [
+            {
+              "Name": "Tua Tagovailoa",
+              "Pos": "QB",
+              "Age": "26",
+              "Weight": "217",
+              "College": "Alabama"
+            },
+            {
+              "Name": "De'Von Achane",
+              "Pos": "RB",
+              "Age": "22",
+              "Weight": "215",
+              "College": "Texas A&M"
+            }
+          ],
+          "title": "Roster",
+          "legends": {}
+        },
+        "team_injuries": {
+          "rows": [
+            {
+              "Name": "Jaylen Waddle",
+              "Pos": "WR",
+              "StartWeek": "5",
+              "EndWeek": "8",
+              "Days": "20"
+            }
+          ],
+          "title": "Team Injuries",
+          "legends": {}
+        },
+        "draft": {
+          "rows": [
+            {
+              "Rnd": "1",
+              "Pk": "3",
+              "Tm": "MIA",
+              "Player": "Tyreek Hill",
+              "Pos": "WR",
+              "College": "Oklahoma",
+              "Ht": "5-10",
+              "Wt": "185"
+            }
+          ],
+          "title": "Draft",
+          "legends": {}
+        },
+        "preseason_odds": {
+          "rows": [
+            {
+              "Game": "Game 1",
+              "Opponent": "Tampa Bay",
+              "Odds": "-7.5"
+            }
+          ],
+          "title": "Preseason Odds",
+          "legends": {}
+        }
+      }
+    },
+    "advanced": {
+      "tables": {
+        "passing_advanced": {
+          "rows": [
+            {
+              "Name": "Tua Tagovailoa",
+              "Age": "26",
+              "CompPct": "57.1",
+              "YdsPerAtt": "7.14",
+              "QBR": "65.2"
+            }
+          ],
+          "title": "Passing Advanced",
+          "legends": {}
+        }
+      }
+    }
+  }
+}

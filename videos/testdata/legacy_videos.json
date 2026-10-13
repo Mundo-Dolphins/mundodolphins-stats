@@ -1,0 +1,18 @@
+[
+  {
+    "date": "1966-09-02",
+    "videos": [
+      { "youtube_id": "AAA", "duration": 2668000000000 }
+    ]
+  },
+  {
+    "date": "1966-09-09",
+    "videos": []
+  },
+  {
+    "date": "1967-10-01",
+    "videos": [
+      { "youtube_id": "BBB", "duration": 600000000000 }
+    ]
+  }
+]

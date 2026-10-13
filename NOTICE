@@ -1,0 +1,21 @@
+mundodolphins-stats
+Copyright (c) 2026 Mundo Dolphins. Licensed under the MIT License (see LICENSE).
+
+Data and services
+-----------------
+
+* The library processes JSON files that the caller produces from third-party
+  sources (statistics sites, league websites). It contains no code that
+  downloads or parses those pages, and the fixtures used by its tests are
+  synthetic. Whoever builds the processed data is responsible for having the
+  right to use its sources.
+* The YouTube client (package youtubeapi) uses the official YouTube Data API v3
+  and is subject to the YouTube API Services Terms of Service.
+
+Trademarks
+----------
+
+NFL, Miami Dolphins, Pro-Football-Reference, YouTube and any other name
+mentioned belong to their respective owners. This project is not affiliated
+with, endorsed by or sponsored by any of them; the names are used only to
+describe what the software works with.

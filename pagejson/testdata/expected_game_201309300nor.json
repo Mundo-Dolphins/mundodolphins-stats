@@ -1,0 +1,490 @@
+{
+  "schema": {
+    "name": "mundodolphins.hugo.sectioned-page",
+    "version": "1.0.0"
+  },
+  "generated_at": "2025-03-15T12:00:00Z",
+  "page": {
+    "kind": "game",
+    "title": "Player HS vs Player HT",
+    "date": "2013-09-30",
+    "slug": "pla-pla-20130930",
+    "path": "historia/partidos/pla-pla-20130930",
+    "params": {
+      "game_id": "201309300nor"
+    }
+  },
+  "sections": {
+    "Anotaciones": {
+      "linescore": [
+        {
+          "Equipo": "Player HS",
+          "1": "3",
+          "2": "7",
+          "3": "0",
+          "4": "7",
+          "Final": "17"
+        },
+        {
+          "Equipo": "Player HT",
+          "1": "7",
+          "2": "14",
+          "3": "14",
+          "4": "3",
+          "Final": "38"
+        }
+      ],
+      "scoring_summary": [
+        {
+          "Cuarto": "1",
+          "Tiempo": "11:52",
+          "Equipo": "Saints",
+          "Descripción": "Player IE carrera de 5 yardas (Player JL kick)",
+          "Marcador visitante": "0",
+          "Marcador local": "7"
+        },
+        {
+          "Cuarto": "1",
+          "Tiempo": "7:16",
+          "Equipo": "Dolphins",
+          "Descripción": "Player JN field goal de 34 yardas",
+          "Marcador visitante": "3",
+          "Marcador local": "7"
+        },
+        {
+          "Cuarto": "2",
+          "Tiempo": "8:01",
+          "Equipo": "Saints",
+          "Descripción": "Player HZ pase de 27 yardas de Player HY (Player JL kick)",
+          "Marcador visitante": "3",
+          "Marcador local": "14"
+        }
+      ]
+    },
+    "Conteo de snaps": {
+      "Player HS": [
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "60",
+          "Nombre": "Player KZ",
+          "Posición": "T",
+          "Equipos especiales": "3",
+          "% EE": "11%"
+        },
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "60",
+          "Nombre": "Player LA",
+          "Posición": "T",
+          "Equipos especiales": "3",
+          "% EE": "11%"
+        },
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "60",
+          "Nombre": "Player LB",
+          "Posición": "G",
+          "Equipos especiales": "3",
+          "% EE": "11%"
+        }
+      ],
+      "Player HT": [
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "67",
+          "Nombre": "Player HU",
+          "Posición": "T",
+          "Equipos especiales": "7",
+          "% EE": "25%"
+        },
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "67",
+          "Nombre": "Player HV",
+          "Posición": "T",
+          "Equipos especiales": "7",
+          "% EE": "25%"
+        },
+        {
+          "% defensiva": "",
+          "Defensiva": "",
+          "% ofensiva": "100%",
+          "Ofensiva": "67",
+          "Nombre": "Player HW",
+          "Posición": "G",
+          "Equipos especiales": "7",
+          "% EE": "25%"
+        }
+      ]
+    },
+    "Equipos": {
+      "Player HS": {
+        "Coach": "Coach K",
+        "Estadísticas": {
+          "Carreras-yardas-TD": "19-115-1",
+          "Comp-Int-Yds-TD-INT": "22-35-249-1-3",
+          "Primeros downs": "19"
+        },
+        "Estadísticas por jugador": {
+          "Defensiva": [
+            {
+              "INT": "",
+              "INT largo": "",
+              "TD INT": "",
+              "Yds INT": "",
+              "FF": "",
+              "FR": "",
+              "TD FR": "",
+              "Yds FR": "",
+              "Pases defendidos": "",
+              "Nombre": "Player KJ",
+              "Golpes QB": "1",
+              "Capturas": "1",
+              "Asist": "1",
+              "Tackles": "5",
+              "TFL": "4",
+              "Solo": "4",
+              "Equipo": "MIA"
+            },
+            {
+              "INT": "",
+              "INT largo": "",
+              "TD INT": "",
+              "Yds INT": "",
+              "FF": "",
+              "FR": "",
+              "TD FR": "",
+              "Yds FR": "",
+              "Pases defendidos": "",
+              "Nombre": "Player KN",
+              "Golpes QB": "1",
+              "Capturas": "1",
+              "Asist": "2",
+              "Tackles": "5",
+              "TFL": "1",
+              "Solo": "3",
+              "Equipo": "MIA"
+            },
+            {
+              "INT": "",
+              "INT largo": "",
+              "TD INT": "",
+              "Yds INT": "",
+              "FF": "",
+              "FR": "",
+              "TD FR": "",
+              "Yds FR": "",
+              "Pases defendidos": "",
+              "Nombre": "Player JZ",
+              "Golpes QB": "",
+              "Capturas": "",
+              "Asist": "1",
+              "Tackles": "8",
+              "TFL": "",
+              "Solo": "7",
+              "Equipo": "MIA"
+            }
+          ],
+          "Equipos especiales": [
+            {
+              "FGa": "1",
+              "FGm": "1",
+              "Nombre": "Player JN",
+              "Punts": "",
+              "Largo punt": "",
+              "Yds punt": "",
+              "Prom punt": "",
+              "Equipo": "MIA",
+              "XPa": "2",
+              "XPm": "2"
+            },
+            {
+              "FGa": "",
+              "FGm": "",
+              "Nombre": "Player JO",
+              "Punts": "4",
+              "Largo punt": "57",
+              "Yds punt": "208",
+              "Prom punt": "52",
+              "Equipo": "MIA",
+              "XPa": "",
+              "XPm": ""
+            },
+            {
+              "Retornos KO": "3",
+              "Largo retorno KO": "28",
+              "TD KO": "",
+              "Yds KO": "68",
+              "Prom KO": "22.70",
+              "Nombre": "Player KC",
+              "Retornos punt": "1",
+              "Largo retorno punt": "5",
+              "TD punt": "",
+              "Yds punt": "5",
+              "Prom punt": "5",
+              "Equipo": "MIA"
+            }
+          ],
+          "Ofensiva": [
+            {
+              "Fumbles": "1",
+              "Fumbles perdidos": "1",
+              "Intentos": "35",
+              "Comp": "22",
+              "INT": "3",
+              "Largo pase": "50",
+              "Rating": "57.90",
+              "Capturas recibidas": "4",
+              "Yds perdidas capturas": "33",
+              "TD pase": "1",
+              "Yds pase": "249",
+              "Nombre": "Player KD",
+              "Rec": "",
+              "Largo recepción": "",
+              "TD recepción": "",
+              "Yds recepción": "",
+              "Carreras": "4",
+              "Largo carrera": "26",
+              "TD carrera": "",
+              "Yds carrera": "48",
+              "Objetivos": "",
+              "Equipo": "MIA"
+            },
+            {
+              "Fumbles": "",
+              "Fumbles perdidos": "",
+              "Intentos": "",
+              "Comp": "",
+              "INT": "",
+              "Largo pase": "",
+              "Rating": "",
+              "Capturas recibidas": "",
+              "Yds perdidas capturas": "",
+              "TD pase": "",
+              "Yds pase": "",
+              "Nombre": "Player KF",
+              "Rec": "1",
+              "Largo recepción": "6",
+              "TD recepción": "",
+              "Yds recepción": "6",
+              "Carreras": "11",
+              "Largo carrera": "20",
+              "TD carrera": "1",
+              "Yds carrera": "62",
+              "Objetivos": "3",
+              "Equipo": "MIA"
+            },
+            {
+              "Fumbles": "",
+              "Fumbles perdidos": "",
+              "Intentos": "",
+              "Comp": "",
+              "INT": "",
+              "Largo pase": "",
+              "Rating": "",
+              "Capturas recibidas": "",
+              "Yds perdidas capturas": "",
+              "TD pase": "",
+              "Yds pase": "",
+              "Nombre": "Player KH",
+              "Rec": "1",
+              "Largo recepción": "1",
+              "TD recepción": "",
+              "Yds recepción": "1",
+              "Carreras": "4",
+              "Largo carrera": "4",
+              "TD carrera": "",
+              "Yds carrera": "5",
+              "Objetivos": "1",
+              "Equipo": "MIA"
+            }
+          ]
+        },
+        "Puntos": 17,
+        "Record": "3-1"
+      },
+      "Player HT": {
+        "Coach": "Coach L",
+        "Estadísticas": {
+          "Carreras-yardas-TD": "24-68-1",
+          "Comp-Int-Yds-TD-INT": "30-39-413-4-0",
+          "Primeros downs": "23"
+        },
+        "Estadísticas por jugador": {
+          "Defensiva": [],
+          "Equipos especiales": [
+            {
+              "FGa": "2",
+              "FGm": "1",
+              "Nombre": "Player JL",
+              "Punts": "",
+              "Largo punt": "",
+              "Yds punt": "",
+              "Prom punt": "",
+              "Equipo": "NOR",
+              "XPa": "5",
+              "XPm": "5"
+            },
+            {
+              "Retornos KO": "2",
+              "Largo retorno KO": "24",
+              "TD KO": "",
+              "Yds KO": "36",
+              "Prom KO": "18",
+              "Nombre": "Player IE",
+              "Retornos punt": "3",
+              "Largo retorno punt": "18",
+              "TD punt": "",
+              "Yds punt": "44",
+              "Prom punt": "14.70",
+              "Equipo": "NOR"
+            }
+          ],
+          "Ofensiva": []
+        },
+        "Puntos": 38,
+        "Record": "4-0"
+      }
+    },
+    "Estadísticas avanzadas": {
+      "Puntos esperados": [
+        {
+          "PE Def. Pase": "-26.72",
+          "PE Def. Carrera": "9.65",
+          "PE Def. Pérdidas": "2.82",
+          "PE Def. Total": "-17.69",
+          "PE FG/XP": "3.49",
+          "PE Kicker": "1.21",
+          "PE Ret. KO": "-0.60",
+          "PE Of. Pase": "-4.34",
+          "PE Of. Carrera": "-0.66",
+          "PE Of. Pérdidas": "-15.19",
+          "PE Of. Total": "-5.42",
+          "PE Punter": "0.09",
+          "PE Ret. Punt": "-2.44",
+          "PE Equipos Esp.": "1.75",
+          "PE Total": "-21",
+          "Equipo": "Dolphins"
+        },
+        {
+          "PE Def. Pase": "4.34",
+          "PE Def. Carrera": "0.66",
+          "PE Def. Pérdidas": "15.19",
+          "PE Def. Total": "5.42",
+          "PE FG/XP": "-3.49",
+          "PE Kicker": "0.60",
+          "PE Ret. KO": "-1.21",
+          "PE Of. Pase": "26.72",
+          "PE Of. Carrera": "-9.65",
+          "PE Of. Pérdidas": "-2.82",
+          "PE Of. Total": "17.69",
+          "PE Punter": "2.44",
+          "PE Ret. Punt": "-0.09",
+          "PE Equipos Esp.": "-1.75",
+          "PE Total": "21",
+          "Equipo": "Saints"
+        }
+      ]
+    },
+    "Información del partido": {
+      "Semana": "4",
+      "Tipo de partido": "regular_season",
+      "Estado": "final",
+      "Fecha": "30 de septiembre de 2013",
+      "Estadio": "Mercedes-Benz Superdome",
+      "Tipo de estadio": "dome",
+      "Superficie de juego": "sportturf"
+    },
+    "Oficiales": [
+      {
+        "Nombre": "Player JP",
+        "Posición": "Referee"
+      },
+      {
+        "Nombre": "Player JQ",
+        "Posición": "Umpire"
+      },
+      {
+        "Nombre": "Player JR",
+        "Posición": "Head Linesman"
+      }
+    ],
+    "Series ofensivas": {
+      "Player HS": [
+        {
+          "#": "1",
+          "Resultado": "Field Goal",
+          "Yardas netas": "67",
+          "Jugadas": "9",
+          "Cuarto": "1",
+          "Posición cancha": "MIA 17",
+          "Inicio": "11:52",
+          "Tiempo": "4:36"
+        },
+        {
+          "#": "2",
+          "Resultado": "Punt",
+          "Yardas netas": "9",
+          "Jugadas": "3",
+          "Cuarto": "1",
+          "Posición cancha": "MIA 35",
+          "Inicio": "6:21",
+          "Tiempo": "1:37"
+        },
+        {
+          "#": "3",
+          "Resultado": "Fumble",
+          "Yardas netas": "46",
+          "Jugadas": "5",
+          "Cuarto": "2",
+          "Posición cancha": "MIA 9",
+          "Inicio": "14:18",
+          "Tiempo": "2:30"
+        }
+      ],
+      "Player HT": [
+        {
+          "#": "1",
+          "Resultado": "Touchdown",
+          "Yardas netas": "82",
+          "Jugadas": "6",
+          "Cuarto": "1",
+          "Posición cancha": "NOR 18",
+          "Inicio": "15:00",
+          "Tiempo": "3:08"
+        },
+        {
+          "#": "2",
+          "Resultado": "Punt",
+          "Yardas netas": "-2",
+          "Jugadas": "3",
+          "Cuarto": "1",
+          "Posición cancha": "NOR 20",
+          "Inicio": "7:16",
+          "Tiempo": "0:55"
+        },
+        {
+          "#": "3",
+          "Resultado": "Punt",
+          "Yardas netas": "22",
+          "Jugadas": "8",
+          "Cuarto": "1",
+          "Posición cancha": "NOR 20",
+          "Inicio": "4:44",
+          "Tiempo": "5:26"
+        }
+      ]
+    },
+    "Videos del partido": []
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "schema": { "name": "mundodolphins.youtube.cache", "version": "1.1.0" },
+  "generated_at": "2026-01-01T00:00:00Z",
+  "items": {
+    "196609020mia": {
+      "status": "selected",
+      "query": "Oakland Raiders vs Miami Dolphins 1966",
+      "updated_at": "2026-01-01T00:00:00Z",
+      "videos": [
+        { "id": "EXISTING", "url": "https://www.youtube.com/watch?v=EXISTING", "title": "x", "channel": "y", "duration_seconds": 10, "selected_at": "2026-01-01T00:00:00Z" }
+      ]
+    }
+  }
+}

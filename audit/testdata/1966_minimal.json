@@ -1,0 +1,80 @@
+{
+  "schema": {
+    "name": "mundodolphins.pfr.team-season",
+    "version": "1.0.0"
+  },
+  "generated_at": "2024-01-15T10:30:00Z",
+  "source": {
+    "site": "pro-football-reference",
+    "url": "https://www.pro-football-reference.com/teams/mia/1966.htm",
+    "cache_file": "cache/pfr/main/1966.html",
+    "fetched_at": "2024-01-15T10:25:00Z"
+  },
+  "team": {
+    "id": "mia",
+    "name": "Miami Dolphins"
+  },
+  "season": 1966,
+  "data": {
+    "main": {
+      "record": "3-11-0",
+      "pts_for": 166,
+      "pts_against": 362
+    },
+    "tables": {
+      "passing": [
+        {
+          "player": "John Stofa",
+          "att": 206,
+          "cmp": 110,
+          "pct": 53.4,
+          "yds": 1524,
+          "td": 8,
+          "int": 19,
+          "rating": 52.8
+        },
+        {
+          "player": "Bob Griese",
+          "att": 18,
+          "cmp": 8,
+          "pct": 44.4,
+          "yds": 103,
+          "td": 1,
+          "int": 0,
+          "rating": 69.8
+        }
+      ],
+      "rushing_and_receiving": [
+        {
+          "player": "Larry Csonka",
+          "rush_att": 84,
+          "rush_yds": 330,
+          "rush_avg": 3.9,
+          "rush_long": 19,
+          "rush_td": 1,
+          "rec": 12,
+          "rec_yds": 85,
+          "rec_avg": 7.1,
+          "rec_long": 15,
+          "rec_td": 0
+        }
+      ],
+      "defense": [
+        {
+          "player": "Nick Buoniconti",
+          "tackles": 138,
+          "tackles_solo": 89,
+          "tackles_assist": 49,
+          "sacks": 0,
+          "sack_yds": 0,
+          "int": 3,
+          "int_yds": 45,
+          "int_td": 0,
+          "pd": 15,
+          "fumbles": 2,
+          "fumbles_rec": 1
+        }
+      ]
+    }
+  }
+}
